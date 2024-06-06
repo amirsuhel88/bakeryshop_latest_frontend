@@ -1,0 +1,17 @@
+.hero-carousel {
+  margin-top: 20px; /* Adjust the value as needed */
+}
+
+.carousel-item {
+  position: relative;
+  height: 300px; /* Set the desired height */
+}
+
+.carousel-item img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
