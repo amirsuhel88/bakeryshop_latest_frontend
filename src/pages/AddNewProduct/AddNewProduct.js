@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../../context.js/AuthContext";
 import "../../assets/data/styles/style.css";
+import Navbar from "../../widget/Components/Navbar";
+import Footer from "../../widget/Components/Footer";
 
 function AddNewProduct() {
   const [values, setValues] = useState({
@@ -76,6 +78,7 @@ function AddNewProduct() {
 
   return (
     <div className="container-fluid">
+    <Navbar />
       <div className="row">
         <div
           className="col-5 d-flex align-items-center justify-content-center"
@@ -173,6 +176,7 @@ function AddNewProduct() {
           </form>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

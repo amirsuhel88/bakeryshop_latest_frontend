@@ -5,18 +5,18 @@ import Navbar from "../../widget/Components/Navbar";
 import Footer from "../../widget/Components/Footer";
 import AddToCartButton from "../../widget/Components/AddToCartButton/AddToCartButton";
 import "./SingleProduct.css"; // Make sure to import the CSS file
-import { useAuth } from "../../context.js/AuthContext";
-import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../widget/Components/Redux/reducers/cartReducer";
-
+//import { useAuth } from "../../context.js/AuthContext";
+//import { useDispatch, useSelector } from "react-redux";
+//import { addToCart } from "../../widget/Components/Redux/reducers/cartReducer";
+import UpDown from "../../widget/Components/UpDown/UpDown"
 function SingleProduct() {
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const { token } = useAuth();
-  const cartItems = useSelector((state) => state.cart.items);
-  const dispatch = useDispatch();
+//  const { token } = useAuth();
+  //const cartItems = useSelector((state) => state.cart.items);
+  //const dispatch = useDispatch();
 
   const fetchProduct = useCallback(async () => {
     setLoading(true);
@@ -38,32 +38,10 @@ function SingleProduct() {
       setLoading(false);
     }
   }, [productId]);
-
+  console.log(product);
   useEffect(() => {
     fetchProduct();
   }, [fetchProduct]);
-
-  const handleAddToCart = async (product) => {
-    console.log("Product added to cart:");
-    try {
-      const response = await axios.post(
-        `http://localhost:8081/api/v3/addToCart/${product.ProductId}`,
-        {},
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-     //console.log("Product added to cart:", response.data);
-      dispatch(addToCart(product));
-    } catch (error) {
-      console.error("Error adding product to cart:", error);
-      setError("Error adding product to cart");
-    }
-  };
-
-  const isProductInCart = (productId) => {
-    return cartItems.some((item) => item.ProductId === productId);
-  };
 
   const handleBuyNow = (productId) => {
     console.log("Product bought:", productId);
@@ -76,20 +54,26 @@ function SingleProduct() {
       <div className="container my-5">
         <div className="row">
           <div className="col-md-6 mb-3">
-            {loading && (
-              <div className="spinner-border text-primary" role="status">
-                <span className="visually-hidden">Loading...</span>
-              </div>
-            )}
+            <div className="col-md-6 mb-3">
+              {loading && (
+                <div className="spinner-border text-primary" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              )}
+              {error && <div className="alert alert-danger">{error}</div>}
+              {product && (
+                <img
+                  src={`http://localhost:8081/public/images/${product.Image}`} // Ensure the URL is correct
+                  className="img-fluid rounded-start"
+                  alt={product.ProductName}
+                  height="2000" // specify your desired height
+                  width="3000"
+                />
+              )}
+            </div>
             {error && <div className="alert alert-danger">{error}</div>}
-            {product && (
-              <img
-                src={product.ImageUrl}
-                className="img-fluid rounded-start"
-                alt={product.ProductName}
-              />
-            )}
           </div>
+
           <div className="col-md-6">
             {product && (
               <div className="card-body">
@@ -97,26 +81,11 @@ function SingleProduct() {
                 <p className="card-text">
                   <small className="text-muted">{product.CategoryName}</small>
                 </p>
-                <p className="card-text">{product.Description}</p>
+                <p className="card-text">{product.Description}</p>  
                 <h5 className="my-4 price">₹{product.Price}</h5>
                 <div className="d-flex justify-content-between align-items-center">
                   <div className="d-flex justify-content-end">
-                    {/* {!isProductInCart(product.ProductId) ? (
-                      <button
-                        className="btn btn-primary me-2"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          handleAddToCart(product);
-                        }}
-                      >
-                        Add to Cart
-                      </button>
-                    ) : (
-                      <button className="btn btn-success me-2" disabled>
-                        Added to Cart
-                      </button>
-                    )} */}
-                    <AddToCartButton/>
+                    <AddToCartButton />
                     <button
                       className="btn btn-primary"
                       onClick={(e) => {
@@ -126,6 +95,7 @@ function SingleProduct() {
                     >
                       Buy Now
                     </button>
+                    <UpDown/>
                   </div>
                   <span className="badge bg-secondary">
                     Rating: {product.Rating}

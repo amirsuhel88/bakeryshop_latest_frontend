@@ -1,8 +1,8 @@
 
 
 import React, { useEffect, useState } from "react";
-//import Navbar from "../../widget/Components/Navbar";
-//import Footer from "../../widget/Components/Footer";
+import Navbar from "../../widget/Components/Navbar";
+import Footer from "../../widget/Components/Footer";
 import axios from "axios";
 import { useAuth } from "../../context.js/AuthContext";
 //import Placeorder from "../../widget/Components/Placeorder";
@@ -33,7 +33,7 @@ function Cart() {
   console.log(cart)
   return (
     <div>
-      
+      <Navbar/>
       <div className="container mt-4">
         <h3>Cart Items</h3>
         <div className="row">
@@ -67,7 +67,7 @@ function Cart() {
         </div>
       </div>
       {/* <UpDown/> */}
-      
+      <Footer/>
     </div>
   );
 }

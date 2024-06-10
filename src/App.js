@@ -1,5 +1,5 @@
 //import logo from './logo.svg';
-import "./App.css";
+//import "./App.css";
 //import Login from './Login';
 import Login from "./pages/Login/Login.js";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -40,7 +40,7 @@ function App() {
                 element={<SingleProduct />}
               ></Route>
               {/* <Route path="/ImageUpload" element={<ImageUpload />}></Route> */}
-              <Route path="/addnewproudct" element={<AddNewProduct/>}></Route>
+              <Route path="/addnewproduct" element={<AddNewProduct/>}></Route>
 
               {/* <Route path="/DashboardOverview" element={<DashboardOverview/>}></Route> */}
             </Routes>

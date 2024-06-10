@@ -23,6 +23,7 @@
     "bootstrap": "^5.3.3",
     "formik": "^2.4.6",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.10.2",
     "react-devtools": "^5.2.0",
     "react-dom": "^18.2.0",
     "react-pro-sidebar": "^1.1.0",
@@ -57,5 +58,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   }
 }

@@ -12,11 +12,11 @@ function AllProducts() {
   const [currentPage, setCurrentPage] = useState(1);
   const [error, setError] = useState(null);
   const [cartItems, setCartItems] = useState([]);
-  const { token } = useAuth();
+  //const { token } = useAuth();
 
   useEffect(() => {
     fetchProducts();
-    fetchCategories();
+    // fetchCategories();
   }, [currentPage]);
 
   const fetchProducts = async () => {
@@ -36,7 +36,7 @@ function AllProducts() {
       console.error("Error fetching products data:", error);
     }
   };
-
+  /*
   const fetchCategories = async () => {
     try {
       const response = await axios.get(
@@ -54,7 +54,8 @@ function AllProducts() {
       console.error("Error fetching categories data:", error);
     }
   };
-
+  */
+  //this part is now using redux
   // const handleAddToCart = async (productId) => {
   //   try {
   //     const response = await axios.post(
@@ -74,7 +75,7 @@ function AllProducts() {
   // };
 
   const handleBuyNow = (productId) => {
-    console.log('Product bought:', productId);
+    console.log("Product bought:", productId);
     // Implement buy now functionality here
   };
 
@@ -97,7 +98,7 @@ function AllProducts() {
         <h3>All Products</h3>
         {error && <div className="alert alert-danger">{error}</div>}
         <div className="row">
-          <div className="col-md-3">
+          {/* <div className="col-md-3">
             <div className="list-group mb-4">
               <h5 className="list-group-item list-group-item-action active">
                 Categories
@@ -112,7 +113,7 @@ function AllProducts() {
                 </a>
               ))}
             </div>
-          </div>
+          </div> */}
           <div className="col-md-9">
             {Array.isArray(products) && products.length > 0 ? (
               products.map((product) => (
@@ -124,21 +125,27 @@ function AllProducts() {
                     {" "}
                     <div className="row g-0">
                       <div className="col-md-4">
-                        <img
-                          src={product.ImageUrl}
-                          className="img-fluid"
-                          alt={product.ProductName}
-                        />
+                      {product && (
+                            <img
+                              src={`http://localhost:8081/public/images/${product.Image}`} // Ensure the URL is correct
+                              className="img-fluid rounded-start"
+                              alt={product.ProductName}
+                              height="2000" // specify your desired height
+                              width="3000"
+                            />
+                          )}
                       </div>
                       <div className="col-md-8">
                         <div className="card-body">
                           <h5 className="card-title">{product.ProductName}</h5>
-                          <p className="card-text">{product.Description}</p>
+                          
                           <p className="card-text">Price: {product.Price}</p>
                           <p className="card-text">
                             Category: {product.CategoryName}
                           </p>
+                          
                           <div className="d-flex justify-content-end">
+                            {/* This part is now using redux component */}
                             {/* {!isProductInCart(product.ProductId) ? (
                               <button
                                 className="btn btn-primary me-2"
@@ -154,8 +161,8 @@ function AllProducts() {
                                 Added to Cart
                               </button>
                             )} */}
-                            <AddToCartButton/>
-                            <button
+                            <AddToCartButton />
+                            {/* <button
                               className="btn btn-primary"
                               onClick={(e) => {
                                 e.preventDefault();
@@ -163,7 +170,7 @@ function AllProducts() {
                               }}
                             >
                               Buy Now
-                            </button>
+                            </button> */}
                           </div>
                         </div>
                       </div>
