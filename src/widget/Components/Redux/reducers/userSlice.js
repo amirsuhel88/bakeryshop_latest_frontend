@@ -1,22 +1,22 @@
 // userSlice.js
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
 export const logout = createAsyncThunk(
-  'user/logout',
+  "user/logout",
   async (_, { dispatch }) => {
     try {
-      await axios.get('http://localhost:8081/api/v1/logout');
-      localStorage.removeItem('userToken');
+      await axios.get("http://localhost:8081/api/v1/logout");
+      localStorage.removeItem("userToken");
       dispatch(clearUser());
     } catch (error) {
-      console.error('Logout failed', error);
+      console.error("Logout failed", error);
     }
   }
 );
 
 const userSlice = createSlice({
-  name: 'user',
+  name: "user",
   initialState: {
     token: null,
     isAdmin: false,

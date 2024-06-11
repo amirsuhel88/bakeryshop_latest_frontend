@@ -9,7 +9,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Provider } from "react-redux";
 import  {store}  from "./widget/Components/Redux/Store";
 //store.subscribe(() => console.log(store.getState()));
-
+import 'bootstrap/dist/css/bootstrap.min.css';   //for admin design. added on 11th june
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>

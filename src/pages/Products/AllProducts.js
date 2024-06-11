@@ -95,10 +95,9 @@ function AllProducts() {
     <>
       <Navbar />
       <div className="container mt-4">
-        <h3>All Products</h3>
-        {error && <div className="alert alert-danger">{error}</div>}
+        {/* {error && <div className="alert alert-danger">{error}</div>} */}
         <div className="row">
-          {/* <div className="col-md-3">
+          <div className="col-md-3">
             <div className="list-group mb-4">
               <h5 className="list-group-item list-group-item-action active">
                 Categories
@@ -113,8 +112,9 @@ function AllProducts() {
                 </a>
               ))}
             </div>
-          </div> */}
+          </div>
           <div className="col-md-9">
+        <h3>All Products</h3>
             {Array.isArray(products) && products.length > 0 ? (
               products.map((product) => (
                 <div key={product.ProductId} className="card mb-3">
@@ -127,7 +127,7 @@ function AllProducts() {
                       <div className="col-md-4">
                       {product && (
                             <img
-                              src={`http://localhost:8081/public/images/${product.Image}`} // Ensure the URL is correct
+                              src={`http://localhost:8081/public/images/${product.Image}`} 
                               className="img-fluid rounded-start"
                               alt={product.ProductName}
                               height="2000" // specify your desired height

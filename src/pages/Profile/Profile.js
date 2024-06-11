@@ -25,7 +25,7 @@ function Profile() {
 
   useEffect(() => {
     fetchUserProfile();
-  }, [token]); // Include token in dependencies array
+  }, [fetchUserProfile]); // Include token in dependencies array
 
   // Frontend design
   return (
