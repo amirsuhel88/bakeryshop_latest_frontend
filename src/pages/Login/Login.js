@@ -5,12 +5,16 @@ import validation from "../Login/Validation/loginValidation.js";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../../context.js/AuthContext";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../widget/Components/Redux/reducers/userSlice.js";
+
 
 function Login() {
   const [values, setValues] = useState({
     email: "",
     password: "",
   });
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { login } = useAuth(); // Access login function from context
   const [errors, setErrors] = useState({});
@@ -37,7 +41,8 @@ function Login() {
           } else {
             localStorage.setItem("userToken", res.data.token);
             login(res.data.token); // Set token using login function from context
-
+            //user redux here
+            dispatch(setUser({ user: res.data.user, isAdmin: res.data.isAdmin }));
             if(!res.data.isAdmin){
               navigate("/");
             } else{

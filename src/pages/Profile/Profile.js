@@ -3,6 +3,7 @@ import Navbar from "../../widget/Components/Navbar";
 import Footer from "../../widget/Components/Footer";
 import axios from "axios";
 import { useAuth } from "../../context.js/AuthContext";
+import LogoutButton from "../../widget/Components/logout/LogoutButton";
 
 function Profile() {
   const [profile, setProfile] = useState(null);
@@ -37,6 +38,7 @@ function Profile() {
             <h4>Name: {profile?.name}</h4>
             <h4>Email: {profile?.email}</h4>
             <h4>Phone: {profile?.phone}</h4>
+          <LogoutButton/>
           </div>
           <Footer />
         </div>
