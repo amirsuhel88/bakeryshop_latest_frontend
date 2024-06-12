@@ -16,6 +16,8 @@ import Placeorder from "./widget/Components/Placeorder.js";
 import SingleProduct from "./pages/ProductPage/SingleProduct.js";
 //import ImageUpload from "./pages/AddNewProduct/ImageUpload.js";
 import AddNewProduct from "./pages/AddNewProduct/AddNewProduct.js";
+import AddNewAddress from "./pages/Address/AddNewAddress.js";
+import OrderPage from "./pages/PlaceOrder/OrderPage.js";
 //import UpDown from "./widget/Components/UpDown/UpDown.js";
 
 function App() {
@@ -41,6 +43,8 @@ function App() {
               ></Route>
               {/* <Route path="/ImageUpload" element={<ImageUpload />}></Route> */}
               <Route path="/addnewproduct" element={<AddNewProduct/>}></Route>
+              <Route path="/addnewaddress" element={<AddNewAddress/>}></Route>
+              <Route path="/orderpage" element={<OrderPage/>}></Route>
 
               {/* <Route path="/DashboardOverview" element={<DashboardOverview/>}></Route> */}
             </Routes>
