@@ -5,14 +5,13 @@ import axios from "axios";
 import { useAuth } from "../../context.js/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-//import Placeorder from "../../widget/Components/Placeorder";
-//import UpDown from "../../widget/Components/UpDown/UpDown.js";
-
 function Cart() {
   const [cart, setCart] = useState([]); // Initialize cart state as an empty array
   const [totalPrice, setTotalPrice] = useState(0); // Initialize totalPrice state
   const { token } = useAuth();
+  const navigate = useNavigate();
 
+  // Fetch cart items function
   const fetchCartItems = async () => {
     try {
       const response = await axios.get(
@@ -35,14 +34,41 @@ function Cart() {
     }
   };
 
+  // useEffect to fetch cart items on component mount or token change
   useEffect(() => {
-    fetchCartItems(); // Fetch cart items when component mounts or token changes
-  }, [token]); // Dependency on token ensures fetching when token changes
+    fetchCartItems();
+  }, [token]);
 
-  const navigate = useNavigate();
+  // Function to handle removal of item from cart
+  const handleRemoveFromCart = async (productId) => {
+    try {
+      // Make DELETE request to remove item from cart
+      await axios.delete(`http://localhost:8081/api/v3/cart/${productId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
+      // Update cart state by filtering out the removed item
+      const updatedCart = cart.filter((item) => item.ProductId !== productId);
+      setCart(updatedCart);
+
+      // Optionally update total price based on the updated cart
+      const updatedTotalPrice = updatedCart.reduce(
+        (total, item) => total + item.Price * item.totalQuantity,
+        0
+      );
+      setTotalPrice(updatedTotalPrice);
+
+      // Update local storage with updated cart items
+      localStorage.setItem("cartItems", JSON.stringify(updatedCart));
+    } catch (error) {
+      console.error("Error removing product from cart:", error);
+      // Handle error (e.g., show error message to the user)
+    }
+  };
+
+  // Function to handle place order button click
   const handleClick = () => {
-    navigate("/orderpage"); // Path to redirect to
+    navigate("/orderpage"); // Redirect to order page
   };
 
   return (
@@ -62,7 +88,7 @@ function Cart() {
                           src={`http://localhost:8081/public/images/${item.Image}`}
                           className="img-fluid rounded-start"
                           alt={item.ProductName}
-                          height="140" // specify your desired height
+                          height="140"
                           width="140"
                         />
                       )}
@@ -74,8 +100,13 @@ function Cart() {
                         <p className="card-text">
                           Quantity: {item.totalQuantity}
                         </p>
+                        <button
+                          className="btn btn-danger"
+                          onClick={() => handleRemoveFromCart(item.ProductId)}
+                        >
+                          Remove from Cart
+                        </button>
                       </div>
-                      {/* <UpDown/> */}
                     </div>
                   </div>
                 </div>
@@ -96,7 +127,6 @@ function Cart() {
                           Price: {item.Price} * {item.totalQuantity}
                         </p>
                       </div>
-                      {/* <UpDown/> */}
                     </div>
                   </div>
                 </div>
@@ -107,12 +137,11 @@ function Cart() {
             <h4>Total Price: {totalPrice}</h4>
           </div>
         </div>
-          {/* buy now button */}
-          <button className="btn btn-primary" onClick={handleClick}>
-            Place Order
-          </button>
+        {/* buy now button */}
+        <button className="btn btn-primary" onClick={handleClick}>
+          Place Order
+        </button>
       </div>
-      {/* <UpDown/> */}
       <Footer />
     </div>
   );

@@ -2,7 +2,8 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBreadSlice,
- // faCartShopping,
+  faCartShopping,
+  faUser,
   //,
 } from "@fortawesome/free-solid-svg-icons"; // Impor
 
@@ -47,22 +48,26 @@ function Navbar() {
         </ul>
         <span className="navbar-text">Navbar text with an inline element</span>
       </div>
-        <form class="form-inline">
-          <Form.Control
-            type="text"
-            className="form-control mr-sm-2"
-            placeholder="Search"
-          />
-        </form>
-        <button className="btn btn-light" type="submit">
-            Search
-          </button>
-          <a className="navbar-brand" href="/">
-        <FontAwesomeIcon icon={faBreadSlice} />
-        Bakery Shop
+      <form class="form-inline">
+        <Form.Control
+          type="text"
+          className="form-control mr-sm-2"
+          placeholder="Search"
+        />
+      </form>
+      <button className="btn btn-light" type="submit">
+        Search
+      </button>
+      <a className="navbar-brand" href="/cart">
+        <FontAwesomeIcon icon={faCartShopping} />
+
       </a>
-          {/* <Button class="btn btn-outline-success my-2 my-sm-0" type="submit" /> */}
-        
+      <a className="navbar-brand" href="/profile">
+        <FontAwesomeIcon icon={faUser} />
+
+      </a>
+      {/* <Button class="btn btn-outline-success my-2 my-sm-0" type="submit" /> */}
+
       {/* <div>
           <a href="/" className="navbar-brand">
             <FontAwesomeIcon icon={faBreadSlice} />
@@ -96,10 +101,8 @@ function Navbar() {
           <FontAwesomeIcon icon={faUser} />
         </a>
         </div> */}
-        
     </nav>
   );
 }
 
 export default Navbar;
-

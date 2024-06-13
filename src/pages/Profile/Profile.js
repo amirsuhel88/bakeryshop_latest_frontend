@@ -30,19 +30,19 @@ function Profile() {
   // Frontend design
   return (
     <div className="page-container">
+          <Navbar />
       <div className="content-wrap">
         <div>
-          <Navbar />
-          <div className="main-content">
+          <div className="main-content card">
             <h3>PROFILE</h3>
             <h4>Name: {profile?.name}</h4>
             <h4>Email: {profile?.email}</h4>
             <h4>Phone: {profile?.phone}</h4>
-          <LogoutButton/>
           </div>
-          <Footer />
+          <LogoutButton/>
         </div>
       </div>
+          <Footer />
     </div>
   );
 }
