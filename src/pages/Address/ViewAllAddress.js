@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../../widget/Components/Navbar";
-import Footer from "../../widget/Components/Footer";
 import axios from "axios";
 import { useAuth } from "../../context.js/AuthContext";
 import { Link } from "react-router-dom";
@@ -37,19 +35,25 @@ function ViewAllAddress() {
     setSelectedAddressIndex(index);
   };
 
+  const handleCardClick = (index) => {
+    handleRadioChange(index);
+  };
+
   return (
     <div className="page-container">
-      <Navbar />
       <div className="container mt-4">
-        <h2>Delivery Address</h2>
-        <hr />
         <div>
           {Array.isArray(addresses) && addresses.length > 0 ? (
             <>
               {addresses
                 .slice(0, showAllAddresses ? addresses.length : 3)
                 .map((address, index) => (
-                  <div key={index} className="card mb-3">
+                  <div
+                    key={index}
+                    className="card mb-3"
+                    onClick={() => handleCardClick(index)}
+                    style={{ cursor: "pointer" }}
+                  >
                     <div className="row g-0">
                       <div className="col-md-12">
                         <div className="card-body">
@@ -66,6 +70,7 @@ function ViewAllAddress() {
                                       id={`addressRadio${index}`}
                                       checked={selectedAddressIndex === index}
                                       onChange={() => handleRadioChange(index)}
+                                      onClick={(e) => e.stopPropagation()}
                                     />
                                     <label
                                       className="form-check-label"
@@ -109,7 +114,6 @@ function ViewAllAddress() {
           )}
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

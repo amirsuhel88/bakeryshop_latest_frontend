@@ -4,6 +4,7 @@ import Footer from "../../widget/Components/Footer";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context.js/AuthContext";
+import ViewAllAddress from "../Address/ViewAllAddress";
 
 function OrderPage() {
   const [cart, setCart] = useState([]); // Initialize cart state as an empty array
@@ -42,6 +43,10 @@ function OrderPage() {
   const handleAddNewAddress = () => {
     navigate("/addnewaddress"); // Path to redirect to
   };
+  const handleContitue = () => {
+    navigate("/payment"); // Path to redirect to
+  };
+  
 
   return (
     <div>
@@ -50,8 +55,11 @@ function OrderPage() {
         <h3>Delivery Address</h3>
         <div className="row">
           <div className="col-md-8 card">
+            {/* view all address */}
+            <ViewAllAddress/>
+
             {/* address form here */}
-            <button className="btn btn-primary" onClick={handleAddNewAddress}> 
+            <button className="btn btn-primary" onClick={handleAddNewAddress}>
               Add New Address
             </button>
           </div>
@@ -75,6 +83,9 @@ function OrderPage() {
               <p>Your cart is empty.</p>
             )}
             <h4>Total Price: {totalPrice}</h4>
+            <button className="btn btn-primary" onClick={handleContitue}>
+              Continue
+            </button>
           </div>
         </div>
       </div>
