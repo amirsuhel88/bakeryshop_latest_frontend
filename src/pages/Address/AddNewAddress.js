@@ -65,9 +65,10 @@ function AddNewAddress() {
   return (
     <div>
       <Navbar />
-      <div className="container my-5">
+      <div className="card my-5">
         <form onSubmit={handleSubmit}>
-          <div className="mb-3">
+          <div className="row mb-3">
+          <div className="col">
             <label htmlFor="Name" className="form-label">
               Name
             </label>
@@ -81,7 +82,7 @@ function AddNewAddress() {
               required
             />
           </div>
-          <div className="mb-3">
+          <div className="col">
             <label htmlFor="Phone" className="form-label">
               Phone
             </label>
@@ -95,7 +96,23 @@ function AddNewAddress() {
               required
             />
           </div>
-          <div className="mb-3">
+          </div>
+          <div className="row mb-3">
+          <div className="col">
+            <label htmlFor="PostalCode" className="form-label">
+              Postal Code
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="PostalCode"
+              name="PostalCode"
+              value={formData.PostalCode}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="col">
             <label htmlFor="Street" className="form-label">
               Street
             </label>
@@ -108,6 +125,7 @@ function AddNewAddress() {
               onChange={handleChange}
               required
             />
+          </div>
           </div>
           <div className="mb-3">
             <label htmlFor="Address" className="form-label">
@@ -123,7 +141,10 @@ function AddNewAddress() {
               required
             />
           </div>
-          <div className="mb-3">
+          
+          
+          <div className="row mb-3">
+          <div className="col">
             <label htmlFor="City" className="form-label">
               City
             </label>
@@ -137,7 +158,7 @@ function AddNewAddress() {
               required
             />
           </div>
-          <div className="mb-3">
+          <div className="col">
             <label htmlFor="Area" className="form-label">
               Area
             </label>
@@ -150,7 +171,9 @@ function AddNewAddress() {
               onChange={handleChange}
             />
           </div>
-          <div className="mb-3">
+          </div>
+          <div className="row mb-3">
+          <div className="col">
             <label htmlFor="State" className="form-label">
               State
             </label>
@@ -163,7 +186,7 @@ function AddNewAddress() {
               onChange={handleChange}
             />
           </div>
-          <div className="mb-3">
+          <div className="col">
             <label htmlFor="Country" className="form-label">
               Country
             </label>
@@ -177,21 +200,10 @@ function AddNewAddress() {
               required
             />
           </div>
-          <div className="mb-3">
-            <label htmlFor="PostalCode" className="form-label">
-              Postal Code
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="PostalCode"
-              name="PostalCode"
-              value={formData.PostalCode}
-              onChange={handleChange}
-              required
-            />
           </div>
-          <div className="mb-3">
+         
+          <div className="row mb-3">
+          <div className="col">
             <label htmlFor="Landmark" className="form-label">
               Landmark
             </label>
@@ -204,7 +216,7 @@ function AddNewAddress() {
               onChange={handleChange}
             />
           </div>
-          <div className="mb-3">
+          <div className="col">
             <label htmlFor="AlternatePhone" className="form-label">
               Alternate Phone
             </label>
@@ -216,6 +228,7 @@ function AddNewAddress() {
               value={formData.AlternatePhone}
               onChange={handleChange}
             />
+          </div>
           </div>
           <button type="submit" className="btn btn-primary" disabled={loading}>
             {loading ? "Adding..." : "Add Address"}

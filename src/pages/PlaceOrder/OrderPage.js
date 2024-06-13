@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../../widget/Components/Navbar";
 import Footer from "../../widget/Components/Footer";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context.js/AuthContext";
+
 function OrderPage() {
   const [cart, setCart] = useState([]); // Initialize cart state as an empty array
   const [totalPrice, setTotalPrice] = useState(0); // Initialize totalPrice state
@@ -34,14 +36,24 @@ function OrderPage() {
     fetchCartItems(); // Fetch cart items when component mounts or token changes
   }, [token]); // Dependency on token ensures fetching when token changes
 
+  //add new address button click
+  const navigate = useNavigate();
+
+  const handleAddNewAddress = () => {
+    navigate("/addnewaddress"); // Path to redirect to
+  };
+
   return (
     <div>
       <Navbar />
       <div className="container mt-4">
-        <h3>Cart Items</h3>
+        <h3>Delivery Address</h3>
         <div className="row">
-          <div className="col-md-8">
+          <div className="col-md-8 card">
             {/* address form here */}
+            <button className="btn btn-primary" onClick={handleAddNewAddress}> 
+              Add New Address
+            </button>
           </div>
           <div className="col-md-4 card mb-3">
             {Array.isArray(cart) && cart.length > 0 ? (
@@ -70,6 +82,5 @@ function OrderPage() {
     </div>
   );
 }
-
 
 export default OrderPage;
