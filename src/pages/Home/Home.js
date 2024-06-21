@@ -20,7 +20,7 @@ function Home() {
           <Navbar/>
           <HeroSection/>
           <CardsComponent/>
-          <Content />
+          {/* <Content /> */}
           {/* <UpDown/>
           <AddToCartButton/> */}
           <AddToCartButton/>

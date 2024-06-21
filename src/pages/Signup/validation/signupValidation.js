@@ -3,7 +3,7 @@ function validation(values) {
   
     const email_pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   
-    const password_pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,}$/
+    const password_pattern = /^[a-zA-Z\d]{8,}$/;
 
     const phone_pattern = /^\d{10}$/;
 
@@ -39,7 +39,7 @@ function validation(values) {
     if (values.password === "") {
       error.password = "Password should not be empty"
     } else if (!password_pattern.test(values.password)) {
-      error.password = "Password pattern didn't match"
+      error.password = "Password should be alpha numeric"
     } else {
       error.password = ""
     }

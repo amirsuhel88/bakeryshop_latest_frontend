@@ -1,5 +1,9 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Form from "react-bootstrap/Form";
+import Dropdown from 'react-bootstrap/Dropdown';
+import LogoutButton from "../../widget/Components/logout/LogoutButton";
+
 import {
   faBreadSlice,
   faCartShopping,
@@ -7,12 +11,9 @@ import {
   //,
 } from "@fortawesome/free-solid-svg-icons"; // Impor
 
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-
 function Navbar() {
   return (
-    <nav className="navbar  navbar-expand-lg ">
+    <nav className="navbar  navbar-expand-lg  navbar-dark bg-dark">
       <a className="navbar-brand" href="/">
         <FontAwesomeIcon icon={faBreadSlice} />
         Bakery Shop
@@ -35,72 +36,34 @@ function Navbar() {
               Home <span className="sr-only">(current)</span>
             </a>
           </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">
-              Features
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">
-              Pricing
-            </a>
-          </li>
         </ul>
-        <span className="navbar-text">Navbar text with an inline element</span>
       </div>
       <form class="form-inline">
         <Form.Control
           type="text"
-          className="form-control mr-sm-2"
+          className="form-control"
           placeholder="Search"
         />
       </form>
+      &nbsp; &nbsp; &nbsp;
       <button className="btn btn-light" type="submit">
         Search
       </button>
+      &nbsp; &nbsp; &nbsp;
       <a className="navbar-brand" href="/cart">
         <FontAwesomeIcon icon={faCartShopping} />
-
       </a>
-      <a className="navbar-brand" href="/profile">
+
+      <Dropdown>
+        <Dropdown.Toggle>
         <FontAwesomeIcon icon={faUser} />
+        </Dropdown.Toggle>
 
-      </a>
-      {/* <Button class="btn btn-outline-success my-2 my-sm-0" type="submit" /> */}
-
-      {/* <div>
-          <a href="/" className="navbar-brand">
-            <FontAwesomeIcon icon={faBreadSlice} />
-          </a>
-        </div> */}
-      {/* <div>
-        <a href="/" className="navbar-brand" style={{ color: 'white' }}>
-           home
-        </a>
-
-          <a
-            href="/category"
-            className="navbar-brand"
-            style={{ color: "white" }}
-          >
-            Category
-          </a>
-        </div> */}
-
-      {/* <form className="d-flex">
-          <input className="form-control me-2" type="search" />
-          <button className="btn btn-light" type="submit">
-            Search
-          </button>
-        </form>
-        <div >
-        <a href="/cart" className="navbar-brand">
-          <FontAwesomeIcon icon={faCartShopping} />
-        </a>
-        <a href="/profile" className="navbar-brand">
-          <FontAwesomeIcon icon={faUser} />
-        </a>
-        </div> */}
+        <Dropdown.Menu>
+          <Dropdown.Item href="/profile">Profile</Dropdown.Item>
+            <Dropdown.Item><LogoutButton/></Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
     </nav>
   );
 }

@@ -3,7 +3,8 @@ import Navbar from "../../widget/Components/Navbar";
 import Footer from "../../widget/Components/Footer";
 import axios from "axios";
 import { useAuth } from "../../context.js/AuthContext";
-import LogoutButton from "../../widget/Components/logout/LogoutButton";
+import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 function Profile() {
   const [profile, setProfile] = useState(null);
@@ -30,19 +31,17 @@ function Profile() {
   // Frontend design
   return (
     <div className="page-container">
-          <Navbar />
+      <Navbar />
       <div className="content-wrap">
-        <div>
-          <div className="main-content card">
-            <h3>PROFILE</h3>
-            <h4>Name: {profile?.name}</h4>
-            <h4>Email: {profile?.email}</h4>
-            <h4>Phone: {profile?.phone}</h4>
-          </div>
-          <LogoutButton/>
-        </div>
+        <Card style={{ width: "30rem" }}>
+          <Card.Header>{profile?.name}</Card.Header>
+          <ListGroup variant="flush">
+            <ListGroup.Item>{profile?.email}</ListGroup.Item>
+            <ListGroup.Item>{profile?.phone}</ListGroup.Item>
+          </ListGroup>
+        </Card>
       </div>
-          <Footer />
+      <Footer />
     </div>
   );
 }

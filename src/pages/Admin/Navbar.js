@@ -1,5 +1,5 @@
 import React from "react";
-import '../../assets/admindata/css/app.css'
+import "../../assets/admindata/css/app.css";
 
 export default function Navbar() {
   return (
@@ -16,6 +16,21 @@ export default function Navbar() {
             <a class="sidebar-link" href="index.html">
               <i class="align-middle" data-feather="sliders"></i>{" "}
               <span class="align-middle">Dashboard</span>
+            </a>
+          </li>
+
+          {/* view all products */}
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="admin/products">
+              <i class="align-middle" data-feather="sliders"></i>{" "}
+              <span class="align-middle">Products</span>
+            </a>
+          </li>
+          {/* view all products */}
+          <li class="sidebar-item">
+            <a class="sidebar-link" href="admin/customers">
+              <i class="align-middle" data-feather="sliders"></i>{" "}
+              <span class="align-middle">Customers</span>
             </a>
           </li>
 
@@ -83,38 +98,7 @@ export default function Navbar() {
               <span class="align-middle">Icons</span>
             </a>
           </li>
-
-          <li class="sidebar-header">Plugins & Addons</li>
-
-          <li class="sidebar-item">
-            <a class="sidebar-link" href="charts-chartjs.html">
-              <i class="align-middle" data-feather="bar-chart-2"></i>{" "}
-              <span class="align-middle">Charts</span>
-            </a>
-          </li>
-
-          <li class="sidebar-item">
-            <a class="sidebar-link" href="maps-google.html">
-              <i class="align-middle" data-feather="map"></i>{" "}
-              <span class="align-middle">Maps</span>
-            </a>
-          </li>
         </ul>
-
-        <div class="sidebar-cta">
-          <div class="sidebar-cta-content">
-            <strong class="d-inline-block mb-2">Upgrade to Pro</strong>
-            <div class="mb-3 text-sm">
-              Are you looking for more components? Check out our premium
-              version.
-            </div>
-            <div class="d-grid">
-              <a href="upgrade-to-pro.html" class="btn btn-primary">
-                Upgrade to Pro
-              </a>
-            </div>
-          </div>
-        </div>
       </div>
     </nav>
   );

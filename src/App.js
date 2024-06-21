@@ -1,60 +1,68 @@
-//import logo from './logo.svg';
-//import "./App.css";
-//import Login from './Login';
-import Login from "./pages/Login/Login.js";
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./context.js/AuthContext.js";
+import PrivateRoute from "./widget/Components/PrivateRoute.js";
+
+import Login from "./pages/Login/Login.js";
 import Signup from "./pages/Signup/Signup.js";
 import Home from "./pages/Home/Home.js";
-// import Admin from "./pages/Admin/Admin.js";
+import Admin from "./pages/Admin/Admin.js";
 import Profile from "./pages/Profile/Profile.js";
-import { AuthProvider } from "./context.js/AuthContext.js";
 import Category from "./pages/Category/Category.js";
 import Cart from "./pages/Cart/Cart.js";
 import AllProducts from "./pages/Products/AllProducts.js";
 import Sidebar from "./pages/Dashboard/Sidebar.js";
 import Placeorder from "./widget/Components/Placeorder.js";
 import SingleProduct from "./pages/ProductPage/SingleProduct.js";
-//import ImageUpload from "./pages/AddNewProduct/ImageUpload.js";
 import AddNewProduct from "./pages/AddNewProduct/AddNewProduct.js";
 import AddNewAddress from "./pages/Address/AddNewAddress.js";
 import OrderPage from "./pages/PlaceOrder/OrderPage.js";
 import ViewAllAddress from "./pages/Address/ViewAllAddress.js";
-
-//import UpDown from "./widget/Components/UpDown/UpDown.js";
+import OrderStatus from "./pages/PlaceOrder/OrderStatus.js";
+import Modal from "./widget/Components/Modal/Modal.js";
+import Products from "./pages/Admin/pages/Products.js";
+import Customers from "./pages/Admin/pages/Customers.js";
+import UpdateProduct from "./pages/Products/UpdateProduct.js";
 
 function App() {
   return (
     <AuthProvider>
       <div className="page-container">
-        <div className="conent-wrap">
+        <div className="content-wrap">
           <BrowserRouter>
             <Routes>
-              <Route path="/login" element={<Login />}></Route>
-              <Route path="/signup" element={<Signup />}></Route>
-              <Route path="/" element={<Home />}></Route>
-              {/* <Route path="/admin" element={<Admin />}></Route> */}
-              <Route path="/profile" element={<Profile />}></Route>
-              <Route path="/category" element={<Category />}></Route>
-              <Route path="/cart" element={<Cart />}></Route>
-              <Route path="/allproducts" element={<AllProducts />}></Route>
-              <Route path="/sidebar" element={<Sidebar />}></Route>
-              <Route path="/placeorder" element={<Placeorder />}></Route>
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/admin" element={<Admin />} />
+              <Route path="/category" element={<Category />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/allproducts" element={<AllProducts />} />
+              <Route path="/sidebar" element={<Sidebar />} />
+              <Route path="/placeorder" element={<Placeorder />} />
               <Route
-                path="/SingleProduct/:productId"
+                path="/singleproduct/:productId"
                 element={<SingleProduct />}
-              ></Route>
-              {/* <Route path="/ImageUpload" element={<ImageUpload />}></Route> */}
-              <Route path="/addnewproduct" element={<AddNewProduct/>}></Route>
-              <Route path="/addnewaddress" element={<AddNewAddress/>}></Route>
-              <Route path="/orderpage" element={<OrderPage/>}></Route>
-              <Route path="/user/viewaddresses" element={<ViewAllAddress/>}></Route>
-
-              {/* <Route path="/DashboardOverview" element={<DashboardOverview/>}></Route> */}
+              />
+              <Route path="/addnewproduct" element={<AddNewProduct />} />
+              <Route path="/updateproduct" element={<UpdateProduct />} />
+              <Route path="/addnewaddress" element={<AddNewAddress />} />
+              <Route path="/orderpage" element={<OrderPage />} />
+              <Route path="/user/viewaddresses" element={<ViewAllAddress />} />
+              <Route path="/orderstatus" element={<OrderStatus />} />
+              <Route path="/modal" element={<Modal />} />
+              <Route path="/admin/products" element={<Products />} />
+              <Route path="/admin/customers" element={<Customers />} />
+              <Route
+                path="/profile"
+                element={
+                  <PrivateRoute>
+                    <Profile />
+                  </PrivateRoute>
+                }
+              />
             </Routes>
           </BrowserRouter>
-          {/* <>
-            <UpDown/>
-          </> */}
         </div>
       </div>
     </AuthProvider>

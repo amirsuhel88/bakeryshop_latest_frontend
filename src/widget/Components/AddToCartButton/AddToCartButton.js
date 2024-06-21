@@ -72,10 +72,12 @@ function AddToCartButton() {
   return (
     <div className="container my-5">
       <div className="row">
-        <div className="col-md-6">
+        {/* <div className="col-md-6"> */}
+        <div className="col">
           {product && (
             <div className="card-body">
-              <div className="d-flex justify-content-end">
+              {/* <div className="d-flex justify-content-end"> */}
+              <div className="d-flex">
                 {!isAddedToCart ? (
                   <button
                     className="btn btn-primary me-2"
@@ -104,3 +106,4 @@ function AddToCartButton() {
 }
 
 export default AddToCartButton;
+

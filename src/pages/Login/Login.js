@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import loginImage from "../../assets/data/images/login.png";
-import "../../assets/data/styles/style.css";
 import validation from "../Login/Validation/loginValidation.js";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../../context.js/AuthContext";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../widget/Components/Redux/reducers/userSlice.js";
-
 
 function Login() {
   const [values, setValues] = useState({
@@ -27,6 +25,8 @@ function Login() {
     }));
   };
 
+  const [queryParameters] = useSearchParams();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     setErrors(validation(values));
@@ -42,19 +42,19 @@ function Login() {
             localStorage.setItem("userToken", res.data.token);
             login(res.data.token); // Set token using login function from context
             //user redux here
-            dispatch(setUser({ user: res.data.user, isAdmin: res.data.isAdmin }));
-            if(!res.data.isAdmin){
+            dispatch(
+              setUser({ user: res.data.user, isAdmin: res.data.isAdmin })
+            );
+            if (!res.data.isAdmin) {
               navigate("/");
-            } else{
-              navigate('/admin')
+            } else {
+              navigate("/admin");
             }
           }
         })
         .catch((err) => console.log(err));
     }
   };
-
-
 
   return (
     <div className="container-fluid">
@@ -70,13 +70,19 @@ function Login() {
           style={{ height: "100vh" }}
         >
           {/* this part is right side of the division. All the login form will stay here */}
-
           <form action="" onSubmit={handleSubmit}>
+            {queryParameters.get("registration")&&(
+            <div className="col-md-10">
+              <div className="alert alert-info mt-3">
+                {" "}
+                Registration is succesfull
+              </div>
+            </div>
+            )}
             <h2>Sign In</h2>
             <p className="opacity-75">
               Please enter your login details to sign in
             </p>
-
             {/* Email input */}
             <div className="mb-3 ">
               <input
@@ -90,7 +96,6 @@ function Login() {
                 <span className="text-danger">{errors.email}</span>
               )}
             </div>
-
             {/* password field */}
             <div className="mb-3">
               <input
@@ -104,12 +109,10 @@ function Login() {
                 <span className="text-danger">{errors.password}</span>
               )}
             </div>
-
             {/* terms and policies */}
             <p className="opacity-75">
               You are agree to our terms and policies
             </p>
-
             {/* login button */}
             <div className="d-grid gap-2">
               <button type="submit" className="login-button">

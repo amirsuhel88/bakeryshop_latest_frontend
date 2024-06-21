@@ -5,6 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context.js/AuthContext";
 import ViewAllAddress from "../Address/ViewAllAddress";
+import Modal from "../../widget/Components/Modal/Modal";
 
 function OrderPage() {
   const [cart, setCart] = useState([]); // Initialize cart state as an empty array
@@ -41,13 +42,30 @@ function OrderPage() {
   const navigate = useNavigate();
 
   const handleAddNewAddress = () => {
-    navigate("/addnewaddress"); // Path to redirect to
+    navigate("/modal"); // Path to redirect to
   };
   const handleContitue = () => {
-    navigate("/payment"); // Path to redirect to
+    navigate("/ordersatus"); // Path to redirect to
   };
-  
 
+  const handlePlaceOrder = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:8081/api/v5/placeOrder",
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      if (response.data.success) {
+        alert(response.data.message); // Success message alert
+        navigate("/orderstatus"); // Navigate to order status page
+      } else {
+        alert("Failed to place order. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error placing order:", error);
+      alert("Failed to place order. Please try again.");
+    }
+  };
   return (
     <div>
       <Navbar />
@@ -56,12 +74,11 @@ function OrderPage() {
         <div className="row">
           <div className="col-md-8 card">
             {/* view all address */}
-            <ViewAllAddress/>
+            <ViewAllAddress />
 
             {/* address form here */}
-            <button className="btn btn-primary" onClick={handleAddNewAddress}>
-              Add New Address
-            </button>
+
+            <Modal />
           </div>
           <div className="col-md-4 card mb-3">
             {Array.isArray(cart) && cart.length > 0 ? (
@@ -83,8 +100,8 @@ function OrderPage() {
               <p>Your cart is empty.</p>
             )}
             <h4>Total Price: {totalPrice}</h4>
-            <button className="btn btn-primary" onClick={handleContitue}>
-              Continue
+            <button className="btn btn-primary" onClick={handlePlaceOrder}>
+              Place Order
             </button>
           </div>
         </div>

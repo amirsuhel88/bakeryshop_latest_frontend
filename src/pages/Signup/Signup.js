@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import loginImage from "../../assets/data/images/login.png";
-import "../../assets/data/styles/style.css"
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import validation from "./validation/signupValidation.js";
 import axios from "axios";
 
@@ -39,11 +38,17 @@ function Signup() {
       axios
         .post("http://localhost:8081/api/v1/signup", values)
         .then(res => {
-          navigate('/');
+
+          // if response is successfull then only navigate to next page
+          if(res.status === 200){
+            navigate('/login?registration=true');
+
+          }
         })
         .catch((err) => console.log(err));
     }
   };
+  
 
   return (
     <div className="container-fluid">

@@ -15,7 +15,7 @@ function LogoutButton() {
         // Call logout function from the auth context if needed
         authLogout();
         // Redirect to login page
-        navigate('/');
+        navigate('/login');
       })
       .catch((err) => console.log('Logout failed', err));
   };

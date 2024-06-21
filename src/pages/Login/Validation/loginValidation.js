@@ -1,9 +1,9 @@
 function validation(values) {
   let error = {};
-  console.log(values);
+
   const email_pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
- // const password_pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,}$/;
+  // const password_pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,}$/;
 
   // email validation
   if (values.email === "") {
@@ -24,7 +24,6 @@ function validation(values) {
   else {
     error.password = "";
   }
-  console.log(error);
   return error;
 }
 

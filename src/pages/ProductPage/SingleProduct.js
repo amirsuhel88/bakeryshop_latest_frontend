@@ -8,13 +8,13 @@ import "./SingleProduct.css"; // Make sure to import the CSS file
 //import { useAuth } from "../../context.js/AuthContext";
 //import { useDispatch, useSelector } from "react-redux";
 //import { addToCart } from "../../widget/Components/Redux/reducers/cartReducer";
-import UpDown from "../../widget/Components/UpDown/UpDown"
+import UpDown from "../../widget/Components/UpDown/UpDown";
 function SingleProduct() {
   const { productId } = useParams();
   const [product, setProduct] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-//  const { token } = useAuth();
+  //  const { token } = useAuth();
   //const cartItems = useSelector((state) => state.cart.items);
   //const dispatch = useDispatch();
 
@@ -81,25 +81,19 @@ function SingleProduct() {
                 <p className="card-text">
                   <small className="text-muted">{product.CategoryName}</small>
                 </p>
-                <p className="card-text">{product.Description}</p>  
+                <p className="card-text">{product.Description}</p>
                 <h5 className="my-4 price">₹{product.Price}</h5>
-                <div className="d-flex justify-content-between align-items-center">
-                  <div className="d-flex justify-content-end">
-                    <AddToCartButton />
-                    <button
-                      className="btn btn-primary"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleBuyNow(product.ProductId);
-                      }}
-                    >
-                      Buy Now
-                    </button>
-                    <UpDown/>
+                <div class="container">
+                  <div class="row d-flex justify-content-center">
+                    {/* <div class="d-flex justify-content-end col"><AddToCartButton /></div>
+                    <div class="col-3"><AddToCartButton /></div> */}
+                    <div className="col-6">
+                      <AddToCartButton />
+                    </div>
+                    <div className="col-6">
+                      <AddToCartButton />
+                    </div>
                   </div>
-                  <span className="badge bg-secondary">
-                    Rating: {product.Rating}
-                  </span>
                 </div>
               </div>
             )}
