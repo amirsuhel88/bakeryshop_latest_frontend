@@ -23,6 +23,8 @@ import Modal from "./widget/Components/Modal/Modal.js";
 import Products from "./pages/Admin/pages/Products.js";
 import Customers from "./pages/Admin/pages/Customers.js";
 import UpdateProduct from "./pages/Products/UpdateProduct.js";
+import SearchButton from "./widget/Components/SearchButton/SearchButton.js";
+import SearchedProducts from "./widget/Components/SearchButton/SearchedProducts.js";
 
 function App() {
   return (
@@ -61,6 +63,8 @@ function App() {
                   </PrivateRoute>
                 }
               />
+              <Route path="/searchproduct" element={<SearchButton />} />
+              <Route path="/searchedproducts" element={<SearchedProducts />} />
             </Routes>
           </BrowserRouter>
         </div>

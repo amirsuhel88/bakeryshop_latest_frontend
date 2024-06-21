@@ -10,6 +10,7 @@ import {
   faUser,
   //,
 } from "@fortawesome/free-solid-svg-icons"; // Impor
+import SearchProducts from "./SearchButton/SearchButton";
 
 function Navbar() {
   return (
@@ -38,17 +39,18 @@ function Navbar() {
           </li>
         </ul>
       </div>
-      <form class="form-inline">
+      {/* <form class="form-inline">
         <Form.Control
           type="text"
           className="form-control"
           placeholder="Search"
         />
-      </form>
+      </form> */}
       &nbsp; &nbsp; &nbsp;
-      <button className="btn btn-light" type="submit">
+      {/* <button className="btn btn-light" type="submit">
         Search
-      </button>
+      </button> */}
+      <SearchProducts/>
       &nbsp; &nbsp; &nbsp;
       <a className="navbar-brand" href="/cart">
         <FontAwesomeIcon icon={faCartShopping} />

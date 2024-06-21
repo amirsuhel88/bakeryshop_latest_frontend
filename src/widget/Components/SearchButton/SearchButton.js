@@ -1,99 +1,47 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import Navbar from "../../widget/Components/Navbar";
-import AddToCartButton from "../../widget/Components/AddToCartButton/AddToCartButton";
-import Footer from "../../widget/Components/Footer";
-import axios from "axios";
-function SearchButton() {
-    const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
+import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate instead of useHistory
+
+const SearchProducts = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [cartItems, setCartItems] = useState([]);
-  //const { token } = useAuth();
+  const navigate = useNavigate(); // Initialize useNavigate hook
 
-  useEffect(() => {
-    fetchProducts();
-    // fetchCategories();
-  }, [currentPage]);
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
 
-  const fetchProducts = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:8081/api/v2/products?page=${currentPage}&limit=10`
-      );
-      const data = response.data;
-      if (Array.isArray(data)) {
-        setProducts(data);
-      } else {
-        setProducts([]);
-        setError("Unexpected data format from products API");
-      }
-    } catch (error) {
-      setError("Error fetching products data");
-      console.error("Error fetching products data:", error);
+      const response = await axios.get(`http://localhost:8081/api/v2/searchproduct?q=${searchTerm}&page=1&limit=10`);
+      setLoading(false);
+      // Redirect to ProductsPage and pass products as state
+      console.log(response.data.data)
+      navigate('/searchedproducts', { state: { products: response.data.data } });
+    } catch (err) {
+      setLoading(false);
+      setError('Error fetching products. Please try again later.');
+      console.error('Error fetching products:', err);
     }
-  };
-  /*
-  const fetchCategories = async () => {
-    try {
-      const response = await axios.get(
-        "http://localhost:8081/api/v2/categories"
-      );
-      const data = response.data;
-      if (Array.isArray(data)) {
-        setCategories(data);
-      } else {
-        setCategories([]);
-        setError("Unexpected data format from categories API");
-      }
-    } catch (error) {
-      setError("Error fetching categories data");
-      console.error("Error fetching categories data:", error);
-    }
-  };
-  */
-  //this part is now using redux
-  // const handleAddToCart = async (productId) => {
-  //   try {
-  //     const response = await axios.post(
-  //       `http://localhost:8081/api/v3/addToCart/${productId}`,
-  //       {},
-  //       {
-  //         headers: { Authorization: `Bearer ${token}` },
-  //       }
-  //     );
-  //     console.log("Product added to cart:", response.data);
-  //     // Update cart items state
-  //     setCartItems((prevCartItems) => [...prevCartItems, productId]);
-  //   } catch (error) {
-  //     console.error("Error adding product to cart:", error);
-  //     setError("Error adding product to cart");
-  //   }
-  // };
-
-  const handleBuyNow = (productId) => {
-    console.log("Product bought:", productId);
-    // Implement buy now functionality here
-  };
-
-  const handleNextPage = () => {
-    setCurrentPage((prevPage) => prevPage + 1);
-  };
-
-  const handlePreviousPage = () => {
-    setCurrentPage((prevPage) => (prevPage > 1 ? prevPage - 1 : prevPage));
-  };
-
-  const isProductInCart = (productId) => {
-    return cartItems.includes(productId);
   };
 
   return (
     <div>
-      
-    </div>
-  )
-}
+      <form onSubmit={handleSearch}>
+        <input
+          type="text"
+          placeholder="Enter search term..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <button type="submit">Search</button>
+      </form>
 
-export default SearchButton
+      {loading && <p>Loading...</p>}
+      {error && <p>{error}</p>}
+    </div>
+  );
+};
+
+export default SearchProducts;

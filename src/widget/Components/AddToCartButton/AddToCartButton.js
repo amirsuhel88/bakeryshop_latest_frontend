@@ -14,6 +14,7 @@ function AddToCartButton() {
   const [isAddedToCart, setIsAddedToCart] = useState(false);
 
   const fetchProduct = useCallback(async () => {
+    if (!productId) return;
     setLoading(true);
     try {
       const response = await axios.get(
